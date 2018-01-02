@@ -2,7 +2,7 @@ import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 import showResults from './showResults'
 import isValidEmail from 'sane-email-validation'
-import provinces from '../data/provinces'
+import states from '../data/states'
 
 const validate = values => {
   const errors = {}
@@ -17,8 +17,8 @@ const validate = values => {
   } else if (!isValidEmail(values.email)) {
     errors.email = 'Invalid Email'
   }
-  if (!values.province) {
-    errors.province = 'Required'
+  if (!values.state) {
+    errors.state = 'Required'
   }
   return errors
 }
@@ -56,11 +56,11 @@ let DemoForm = ({ handleSubmit, submitting }) =>
     <Field name="firstName" label="First Name" component={RenderInput} />
     <Field name="lastName" label="Last Name" component={RenderInput} />
     <Field name="email" label="Email" component={RenderInput} />
-    <Field name="province" label="Province" component={RenderSelect}>
+    <Field name="state" label="State" component={RenderSelect}>
       <option />
-      {provinces.map(province =>
-        <option key={province} value={province}>
-          {province}
+      {states.map(state =>
+        <option key={state} value={state}>
+          {state}
         </option>
       )}
     </Field>
