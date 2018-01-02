@@ -7,11 +7,11 @@ import styledNormalize from 'styled-normalize'
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
   ${styledNormalize}
-  
+
   body {
     font-family: 'Helvetica Neue', arial, sans-serif;
   }
-  
+
   * {
     box-sizing: border-box;
     line-height: 1.3em;
@@ -35,7 +35,7 @@ injectGlobal`
   input, textarea, button {
     outline: none;
   }
-  
+
   button {
     cursor: pointer;
   }
@@ -49,7 +49,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>React Alicante 2017</title>
+          <title>Redux Form</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
