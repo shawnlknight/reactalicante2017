@@ -20,30 +20,45 @@ const validate = values => {
   if (!values.state) {
     errors.state = 'Required'
   }
+  if (!values.zip) {
+    errors.zip = 'Required'
+  }
+  if (!values.age) {
+    errors.age = 'Required'
+  }
+
   return errors
 }
 
-const createRenderer = render => ({ input, meta, label, ...rest }) =>
-  <div
-    className={[
-      meta.error && meta.touched ? 'error' : '',
-      meta.active ? 'active' : ''
-    ].join(' ')}
-  >
-    <label>
-      {label}
-    </label>
-    {render(input, label, rest)}
-    {meta.error &&
-      meta.touched &&
-      <span>
-        {meta.error}
-      </span>}
-  </div>
+const createRenderer = render => ({ input, meta, label, ...rest }) => {
+  console.log('input', input)
 
-const RenderInput = createRenderer((input, label) =>
-  <input {...input} placeholder={label} />
-)
+  return (
+    <div
+      className={[
+        meta.error && meta.touched ? 'error' : '',
+        meta.active ? 'active' : ''
+      ].join(' ')}
+    >
+      <label htmlFor={input.name}>
+        {label}
+      </label>
+      {render(input, label, rest)}
+      {meta.error &&
+        meta.touched &&
+        <span>
+          {meta.error}
+        </span>}
+    </div>
+  )
+}
+
+const RenderInput = createRenderer((input, label, type) => {
+  const inputType = type.type
+  return (
+    <input {...input} type={inputType} placeholder={label} id={input.name} />
+  )
+})
 
 const RenderSelect = createRenderer((input, label, { children }) =>
   <select {...input}>
@@ -53,10 +68,20 @@ const RenderSelect = createRenderer((input, label, { children }) =>
 
 let DemoForm = ({ handleSubmit, submitting }) =>
   <form onSubmit={handleSubmit(showResults)}>
-    <Field name="firstName" label="First Name" component={RenderInput} />
-    <Field name="lastName" label="Last Name" component={RenderInput} />
-    <Field name="email" label="Email" component={RenderInput} />
-    <Field name="state" label="State" component={RenderSelect}>
+    <Field
+      name="firstName"
+      label="First Name"
+      type="text"
+      component={RenderInput}
+    />
+    <Field
+      name="lastName"
+      label="Last Name"
+      type="text"
+      component={RenderInput}
+    />
+    <Field name="email" label="Email" type="text" component={RenderInput} />
+    <Field name="state" label="State" type="text" component={RenderSelect}>
       <option />
       {states.map(state =>
         <option key={state} value={state}>
@@ -64,6 +89,8 @@ let DemoForm = ({ handleSubmit, submitting }) =>
         </option>
       )}
     </Field>
+    <Field name="zip" label="Zip" type="text" component={RenderInput} />
+    <Field name="age" label="Age" type="number" component={RenderInput} />
     <button type="submit" disabled={submitting}>
       Submit
     </button>
@@ -74,4 +101,5 @@ DemoForm = reduxForm({
   destroyOnUnmount: false,
   validate
 })(DemoForm)
+
 export default DemoForm
