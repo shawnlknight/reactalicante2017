@@ -6,6 +6,7 @@ import states from '../data/states'
 
 const validate = values => {
   const errors = {}
+
   if (!values.firstName) {
     errors.firstName = 'Required'
   }
@@ -31,8 +32,6 @@ const validate = values => {
 }
 
 const createRenderer = render => ({ input, meta, label, ...rest }) => {
-  console.log('input', input)
-
   return (
     <div
       className={[
@@ -91,9 +90,11 @@ let DemoForm = ({ handleSubmit, submitting }) =>
     </Field>
     <Field name="zip" label="Zip" type="text" component={RenderInput} />
     <Field name="age" label="Age" type="number" component={RenderInput} />
-    <button type="submit" disabled={submitting}>
-      Submit
-    </button>
+    <div>
+      <button type="submit" disabled={submitting}>
+        Submit
+      </button>
+    </div>
   </form>
 
 DemoForm = reduxForm({

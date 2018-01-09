@@ -19,11 +19,6 @@ const icon = css`
   -moz-osx-font-smoothing: grayscale;
 `
 
-const paperPlane = css`
-  ${icon}
-  content: '\f1d8';
-`
-
 const plus = css`
   ${icon}
   content: '\f067';
@@ -43,8 +38,9 @@ const btn = (light, dark) => css`
   white-space: nowrap;
   display: inline-block;
   border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 16px;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1.5rem;
   color: white;
   &:visited {
     color: white;
@@ -115,20 +111,16 @@ const App = styled.div`
     textarea,
     select {
       flex: 1;
-      padding: 5px 8px;
+      padding: 6px 8px;
       border: 1px solid #ddd;
       border-radius: 2px;
     }
     button {
-      margin: 10px;
       &[type='button'] {
         ${btnDefault};
       }
       &[type='submit'] {
         ${btnPrimary};
-        &:before {
-          ${paperPlane} margin-right: 5px;
-        }
       }
       &.submitting {
         cursor: wait !important;
